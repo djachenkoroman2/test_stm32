@@ -1,0 +1,5 @@
+На основе doc/motor_i2c_module/wiring.md необходимо разработать схему для программы fritzing
+Для ZK-5AD использовать компонент /home/roman/Documents/Fritzing-elem/motor-driver-ZK-5AD.fzpz
+Для Blue Pill использовать компонент /home/roman/Documents/Fritzing-elem/STM32_Blue_Pill.fzpz
+Для моторов использовать компонент /home/roman/Documents/Fritzing-elem/JGB37-520_Encoder_Motor.fzpz
+Вывести отдельный штырьковый разъем для i2c

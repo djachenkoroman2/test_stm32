@@ -18,6 +18,7 @@
 | [testing.md](testing.md) | пошаговая проверка с критериями |
 | [troubleshooting.md](troubleshooting.md) | симптом → причина → что проверить |
 | [examples/esp32_master](examples/esp32_master/esp32_master.ino) | тестовый master для ESP32 DOIT DevKit V1 |
+| [fritzing/](fritzing/README.md) | схема в Fritzing: макетная плата, принципиальная схема, SVG |
 
 ## Возможности
 
@@ -37,6 +38,8 @@
   - аппаратный IWDG на случай зависания прошивки.
 - I2C: адрес 0x20, 100/400 кГц, карта регистров, CRC-8 (SMBus PEC) на
   каждой записи.
+- Питание модуля от master через тот же разъём: J1 — GND, 5V, SCL, SDA
+  (5 В через диод Шоттки, [wiring.md](wiring.md), раздел 4.1).
 - Отладочный вывод в Serial по USB, не влияющий на контур.
 - Прошивка по USB через HID Bootloader.
 
