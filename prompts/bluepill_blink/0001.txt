@@ -1,0 +1,39 @@
+Задача: добавить в текущий PlatformIO-проект отдельное окружение для проверки платы Blue Pill (STM32F103C8T6) миганием светодиода.
+
+Контекст:
+- Проект уже содержит окружение [env:genericSTM32F103C8] (platform = ststm32, framework = arduino) с кодом в src/main.cpp.
+- Существующее окружение и его код не должны сломаться: после изменений оно должно собираться так же, как раньше.
+
+Что сделать:
+1. Окружение
+   - Добавь в platformio.ini окружение [env:bluepill_blink] (board = bluepill_f103c8 или genericSTM32F103C8, framework = arduino).
+   - Код окружения положи в отдельную папку src/bluepill_blink/ со своим main.cpp.
+   - Настрой build_src_filter так, чтобы каждое окружение собирало только свой код:
+     новое — только src/bluepill_blink/, старое — всё, кроме src/bluepill_blink/.
+   - Укажи upload_protocol = stlink (основной вариант прошивки) и monitor_speed = 115200.
+
+2. Программа мигания (src/bluepill_blink/main.cpp)
+   - Встроенный светодиод Blue Pill — PC13, он активен низким уровнем (LOW = горит).
+   - Мигание с периодом 1 с (500 мс горит / 500 мс не горит), период вынеси в константу.
+   - Без блокирующего delay() — используй millis(), чтобы в loop() можно было добавлять другой код.
+   - Дополнительно выводи в Serial строку "LED ON"/"LED OFF" при каждом переключении.
+
+3. Промпты
+   - Создай папку prompts/bluepill_blink/ для промптов этого окружения.
+   - Положи туда 0001.txt с текстом этого промпта.
+
+4. Документация
+   - Создай папку doc/bluepill_blink/ и в ней README.md, где кратко описано:
+     назначение окружения; используемый пин и почему он инвертирован;
+     команды сборки, прошивки и монитора порта:
+       pio run -e bluepill_blink
+       pio run -e bluepill_blink -t upload
+       pio device monitor -e bluepill_blink
+     подключение ST-Link (3.3V, GND, SWDIO, SWCLK) и альтернативу прошивки через USB-UART (upload_protocol = serial, BOOT0 = 1);
+     как понять, что тест пройден (светодиод мигает раз в секунду).
+
+Критерии готовности:
+- pio run -e bluepill_blink собирается без ошибок и предупреждений.
+- pio run -e genericSTM32F103C8 по-прежнему собирается.
+- Созданы папки и файлы: src/bluepill_blink/main.cpp, prompts/bluepill_blink/0001.txt, doc/bluepill_blink/README.md.
+- Прошивать плату не нужно — только проверить сборку. В конце перечисли изменённые и созданные файлы.
