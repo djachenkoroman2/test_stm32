@@ -9,6 +9,7 @@ PlatformIO-проект для экспериментов с платой Blue P
 | `genericSTM32F103C8` | `src/genericSTM32F103C8/` | Базовый шаблон |
 | `bluepill_blink` | `src/bluepill_blink/` | Тест платы миганием светодиода, прошивка через ST-Link |
 | `bluepill_blink_hid` | `src/bluepill_blink/` | Тот же тест, прошивка по USB через HID Bootloader, Serial через USB CDC |
+| `motor_i2c_module` | `src/motor_i2c_module/` | I2C slave: четыре мотора JGB37-520 с энкодерами через два ZK-5AD, PID по скорости |
 
 ```sh
 pio run -e bluepill_blink_hid -t upload
@@ -18,5 +19,5 @@ pio device monitor -e bluepill_blink_hid
 ## Структура
 
 - `src/<окружение>/` — код окружения (выбирается через `build_src_filter`).
-- `doc/<окружение>/` — документация: [bluepill_blink](doc/bluepill_blink/README.md).
+- `doc/<окружение>/` — документация: [bluepill_blink](doc/bluepill_blink/README.md), [motor_i2c_module](doc/motor_i2c_module/README.md).
 - `prompts/` — промпты для Claude Code, по которым создавались окружения.
